@@ -4,6 +4,7 @@ import "dotenv/config";
 import todoRoutes from "./routes/todo.routes.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
 import { notFound } from "./middlewares/notFound.middleware.js";
+import cors from "cors";
 
 async function start() {
   const port = process.env.PORT || 3000;
@@ -12,6 +13,8 @@ async function start() {
   const db = await connectDB(uri);
 
   const app = express();
+
+  app.use(cors());
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
